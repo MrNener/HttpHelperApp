@@ -15,3 +15,11 @@ D:\Documents\Visual Studio 2015\Projects\HttpHelperApp\HttpHelperApp\obj\Debug\H
 D:\Documents\Visual Studio 2015\Projects\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.MainForm.resources
 D:\Documents\Visual Studio 2015\Projects\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.Properties.Resources.resources
 D:\Documents\Visual Studio 2015\Projects\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.csproj.GenerateResource.Cache
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\bin\Debug\HttpHelperApp.exe.config
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.exe
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.pdb
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\bin\Debug\HttpHelperApp.exe
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\bin\Debug\HttpHelperApp.pdb
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.MainForm.resources
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.Properties.Resources.resources
+E:\SourcesTree\HttpHelperApp\HttpHelperApp\obj\Debug\HttpHelperApp.csproj.GenerateResource.Cache

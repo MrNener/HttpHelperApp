@@ -61,7 +61,7 @@ namespace HttpHelperApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://baidu.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://baidu.com")]
         public string Url {
             get {
                 return ((string)(this["Url"]));
@@ -85,13 +85,61 @@ namespace HttpHelperApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public decimal TimeOut {
             get {
                 return ((decimal)(this["TimeOut"]));
             }
             set {
                 this["TimeOut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("application/x-www-form-urlencoded")]
+        public string ContentType {
+            get {
+                return ((string)(this["ContentType"]));
+            }
+            set {
+                this["ContentType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)")]
+        public string UserAgent {
+            get {
+                return ((string)(this["UserAgent"]));
+            }
+            set {
+                this["UserAgent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Referer {
+            get {
+                return ((string)(this["Referer"]));
+            }
+            set {
+                this["Referer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowResult {
+            get {
+                return ((bool)(this["ShowResult"]));
+            }
+            set {
+                this["ShowResult"] = value;
             }
         }
     }

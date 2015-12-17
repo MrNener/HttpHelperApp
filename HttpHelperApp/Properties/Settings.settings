@@ -12,13 +12,25 @@
       <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="Url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://baidu.com</Value>
+      <Value Profile="(Default)">https://baidu.com</Value>
     </Setting>
     <Setting Name="Data" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TimeOut" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="ContentType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">application/x-www-form-urlencoded</Value>
+    </Setting>
+    <Setting Name="UserAgent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)</Value>
+    </Setting>
+    <Setting Name="Referer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShowResult" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

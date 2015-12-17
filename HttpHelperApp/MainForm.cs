@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,6 +37,8 @@ namespace HttpHelperApp
 
         [DllImport("kernel32.dll")]
         public static extern bool SetConsoleTitle(string strMessage);
+
+
         private void btnGo_Click(object sender, EventArgs e)
         {
             var cof = new HttpConfig
@@ -44,6 +47,9 @@ namespace HttpHelperApp
                 SendData = rtbData.Text,
                 Timeout = ((int)nupTimeout.Value) * 1000,
                 Method = cbMethod.SelectedItem.ToString(),
+                ContentType = tbContentType.Text,
+                Referer = tbReferer.Text,
+                UserAgent = tbUserAgent.Text
             };
             if (string.IsNullOrEmpty(cof.Url))
             {
@@ -52,12 +58,26 @@ namespace HttpHelperApp
                 return;
             }
             var hep = new HttpHelper(cof, $"{wId++}");
-            AllocConsole();
-            IntPtr windowHandle = FindWindow(null, Process.GetCurrentProcess().MainModule.FileName);
-            IntPtr closeMenu = GetSystemMenu(windowHandle, IntPtr.Zero);
-            uint SC_CLOSE = 0xF060;
-            RemoveMenu(closeMenu, SC_CLOSE, 0x0);
-            SetConsoleTitle("Log");
+            if (cbShowResult.Checked)
+            {
+                hep.HandelRes+= a =>
+                {
+                    rtbRes.BeginInvoke(new Action(() =>
+                    {
+                        rtbRes.Text = a;
+                    }));
+                };
+                AllocConsole();
+                IntPtr windowHandle = FindWindow(null, Process.GetCurrentProcess().MainModule.FileName);
+                IntPtr closeMenu = GetSystemMenu(windowHandle, IntPtr.Zero);
+                uint SC_CLOSE = 0xF060;
+                RemoveMenu(closeMenu, SC_CLOSE, 0x0);
+                SetConsoleTitle("Log");
+            }
+            else
+            {
+                hep.HandelRes = a => { };
+            }
             hep.DoWork((int)nudThreadCount.Value, (int)nudSingleCount.Value);
         }
 
@@ -70,6 +90,10 @@ namespace HttpHelperApp
             cbMethod.SelectedIndex = set.Method < 0 ? 0 : set.Method;
             nudThreadCount.Value = set.ThreadCount;
             nudSingleCount.Value = set.SingleCount;
+            tbContentType.Text = set.ContentType;
+            tbUserAgent.Text = set.UserAgent;
+            tbUserAgent.Text = set.Referer;
+            cbShowResult.Checked = set.ShowResult;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -81,6 +105,10 @@ namespace HttpHelperApp
             set.Method = cbMethod.SelectedIndex;
             set.ThreadCount = nudThreadCount.Value;
             set.SingleCount = nudSingleCount.Value;
+            set.ContentType = tbContentType.Text;
+            set.UserAgent = tbUserAgent.Text;
+            set.Referer = tbUserAgent.Text;
+            set.ShowResult = cbShowResult.Checked;
             set.Save();
         }
     }

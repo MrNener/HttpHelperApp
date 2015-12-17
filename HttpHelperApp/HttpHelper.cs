@@ -14,6 +14,9 @@ namespace HttpHelperApp
 
         public int Timeout { get; set; } = 10000;
         public string SendData { get; set; }
+        public string ContentType { get; set; } = "application/x-www-form-urlencoded";
+        public string UserAgent { get; set; } = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)";
+        public string Referer { get;  set; }
     }
 
     public class HttpHelper
@@ -42,14 +45,18 @@ namespace HttpHelperApp
                 System.Net.HttpWebRequest httpRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(conf.Url);
                 httpRequest.Method = conf.Method;
                 httpRequest.Timeout = conf.Timeout;
+                httpRequest.ContentType = conf.ContentType;
+                httpRequest.UserAgent = conf.UserAgent;
+                httpRequest.ReadWriteTimeout = conf.Timeout;
+                httpRequest.Referer = conf.Referer;
                 if (!string.IsNullOrEmpty(conf.SendData))
                 {
                     byte[] btBodys = Encoding.UTF8.GetBytes(conf.SendData);
                     httpRequest.ContentLength = btBodys.Length;
                     httpRequest.GetRequestStream().Write(btBodys, 0, btBodys.Length);
                 }
-
-                using (System.IO.Stream receiveStream = httpRequest.GetResponse().GetResponseStream())
+                var httpResResponse = (System.Net.HttpWebResponse)httpRequest.GetResponse();
+                using (System.IO.Stream receiveStream = httpResResponse.GetResponseStream())
                 {
                     using (var rs = new System.IO.StreamReader(receiveStream))
                     {
@@ -67,22 +74,19 @@ namespace HttpHelperApp
             List<Task> tLs = new List<Task>();
             while (theadCount > 0)
             {
-                tLs.Add(new Task(() =>
-                {
-                    var c = singleCount;
-                    while (c > 0)
-                    {
-                        int i = singleCount;
-                        HandelRes($"WorkId {workerId}; Task Id:{Task.CurrentId};Index:{ totalCount++};Result:{GetRes()}");
-                        --c;
-                    }
-                }));
+                var task = Task.Factory.StartNew(() =>
+                 {
+                     var c = singleCount;
+                     while (c > 0)
+                     {
+                         int i = singleCount;
+                         var res = GetRes();
+                         HandelRes($"WorkId {workerId}; Task Id:{Task.CurrentId};Index:{ totalCount++};Result:{res}");
+                         --c;
+                     }
+                 });
                 --theadCount;
             }
-            tLs.ForEach(a =>
-            {
-                a.Start();
-            });
         }
     }
 }
