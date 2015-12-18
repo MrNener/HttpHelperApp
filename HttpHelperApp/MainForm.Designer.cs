@@ -172,7 +172,7 @@
             // 
             this.nudSingleCount.Location = new System.Drawing.Point(303, 287);
             this.nudSingleCount.Maximum = new decimal(new int[] {
-            10000,
+            100000000,
             0,
             0,
             0});

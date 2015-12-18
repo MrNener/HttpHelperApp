@@ -22,7 +22,7 @@ namespace HttpHelperApp
     public class HttpHelper
     {
         private HttpConfig conf;
-        private int totalCount = 1;
+        private long totalCount = 1;
         public Action<string> HandelRes = (a) =>
         {
            System.Console.WriteLine(a);
@@ -71,10 +71,11 @@ namespace HttpHelperApp
         }
         public void DoWork(int theadCount, int singleCount)
         {
+
             List<Task> tLs = new List<Task>();
             while (theadCount > 0)
             {
-                var task = Task.Factory.StartNew(() =>
+                var task = new Task(() =>
                  {
                      var c = singleCount;
                      while (c > 0)
@@ -85,8 +86,13 @@ namespace HttpHelperApp
                          --c;
                      }
                  });
+                tLs.Add(task);
                 --theadCount;
             }
+            tLs.ForEach(a =>
+            {
+                a.Start();
+            });
         }
     }
 }
